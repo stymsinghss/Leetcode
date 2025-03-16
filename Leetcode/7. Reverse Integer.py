@@ -8,9 +8,9 @@ class Solution:
             sign = False
             x = abs(x)
 
-        while x > 0:
+        while x:
             rev_num = rev_num*10 + x%10
-            if INT_MIN > rev_num > INT_MAX:
+            if rev_num < INT_MIN or rev_num > INT_MAX:
                 return 0
             x //= 10
 
