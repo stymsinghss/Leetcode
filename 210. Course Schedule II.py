@@ -8,8 +8,8 @@ class Solution:
         indegree = [0]*numCourses
 
         for end,start in prerequisites:
-            graph[end].append(start)
-            indegree[start] += 1
+            graph[start].append(end)
+            indegree[end] += 1
 
         q = deque([i for i in range(numCourses) if indegree[i] == 0])
 
@@ -22,5 +22,5 @@ class Solution:
                 if indegree[neigh] == 0:
                     q.append(neigh)
 
-        return courses[::-1] if len(courses) == numCourses else []
+        return courses if len(courses) == numCourses else []
         
