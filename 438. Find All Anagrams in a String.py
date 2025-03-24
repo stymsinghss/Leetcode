@@ -16,3 +16,27 @@ class Solution:
                 anagrams.append(i)
 
         return anagrams
+
+    # Variable window
+    def findAnagramsVariableWindow(self, s: str, p: str) -> List[int]:
+        anagrams = []
+
+        mapper = {}
+        len_p, len_s = len(p), len(s)
+        counter_p = Counter(p)
+        left = 0
+
+        for right in range(len_s):
+            # expand the window
+            mapper[s[right]] = mapper.get(s[right], 0) + 1
+
+            # shrink the window
+            if right - left + 1 > len_p:
+                mapper[s[left]] -= 1
+                if mapper[s[left]] == 0:
+                    del mapper[s[left]]
+                left += 1
+
+            if mapper == counter_p:
+                anagrams.append(left)
+        return anagrams
